@@ -1,0 +1,46 @@
+version: "{build}"
+
+os: Windows Server 2012
+platform:
+  - x64
+
+environment:
+  bundle_gemfile: Gemfile
+
+  matrix:
+    - ruby_version: "193"
+      chef_version: "< 12"
+
+    - ruby_version: "200"
+      chef_version: "< 12"
+
+    - ruby_version: "200"
+      chef_version: "~> 12.0"
+
+    - ruby_version: "200"
+      chef_version: "master"
+
+clone_folder: c:\projects\specinfra
+clone_depth: 1
+branches:
+  only:
+    - winrm_test_on_appveyor
+
+cache:
+  - C:\Ruby200\lib\ruby\gems\2.0.0
+  - C:\Ruby200\bin
+
+install:
+  - winrm quickconfig -q
+  - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
+  - echo %PATH%
+  - ruby --version
+  - gem --version
+  - gem install winrm --no-ri --no-rdoc
+
+build_script:
+  - gem build specinfra.gemspec
+  - gem install -b specinfra-*.gem
+
+test_script:
+  - /bin/true
