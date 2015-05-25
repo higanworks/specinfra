@@ -9,16 +9,7 @@ environment:
 
   matrix:
     - ruby_version: "193"
-      chef_version: "< 12"
-
     - ruby_version: "200"
-      chef_version: "< 12"
-
-    - ruby_version: "200"
-      chef_version: "~> 12.0"
-
-    - ruby_version: "200"
-      chef_version: "master"
 
 clone_folder: c:\projects\specinfra
 clone_depth: 1
