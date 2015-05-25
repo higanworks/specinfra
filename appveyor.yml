@@ -36,4 +36,4 @@ build_script:
   - gem install -b specinfra-*.gem
 
 test_script:
-  - /bin/true
+  - ruby -r winrm -e 'WinRM::WinRMWebService.new("http://127.0.0.1:5985/wsman").run_cmd("net user")'
