@@ -17,6 +17,7 @@ module Specinfra
       end
 
       def set_config(key, value)
+        Specinfra::Configuration.send(key, value)  if Specinfra::Configuration.respond_to?(key)
         @config[key] = value
       end
 
