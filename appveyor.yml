@@ -35,7 +35,7 @@ install:
   - echo %PATH%
   - ruby --version
   - gem --version
-  - appveyor DownloadFile %bundler_url% -FileName bundler.gem
+  - appveyor DownloadFile -Url %bundler_url% -FileName bundler.gem
   - gem install --local bundler.gem --no-document ## appveyor often stops `gem install bundler`..?
 
 build_script:
