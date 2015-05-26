@@ -1,4 +1,4 @@
-version: "$(appveyor_repo_branch)-$(appveyor_repo_commit)"
+version: "{build}"
 
 os: Windows Server 2012
 platform:
