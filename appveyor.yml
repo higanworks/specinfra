@@ -35,13 +35,12 @@ install:
   - echo %PATH%
   - ruby --version
   - gem --version
+  - appveyor DownloadFile %bundler_url% -FileName bundler.gem
+  - gem install --local bundler.gem --no-document ## appveyor often stops `gem install bundler`..?
   - gem install bundler --no-ri --no-rdoc
 
 build_script:
-  - bundle install 
-  - netstat -a
-  - net user
-  - net localgroup
+  - bundle install --jobs 3 --retry -3
   - net user appveyor p@ssword55
 
 test_script:
