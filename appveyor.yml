@@ -6,6 +6,7 @@ platform:
 
 environment:
   bundle_gemfile: test/integration/winrm/Gemfile
+  bundler_url: https://rubygems.org/downloads/bundler-1.9.9.gem
 
   matrix:
     - ruby_version: "193"
