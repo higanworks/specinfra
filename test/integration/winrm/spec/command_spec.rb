@@ -6,7 +6,7 @@ describe Specinfra::Backend::Winrm do
     end
   end
 
-  describe "#get_command for powershell" do
+  describe "#command.get" do
     subject{Specinfra.backend.command.get(:check_user_exists, 'testuser')}
 
     it "returns powershell command" do
@@ -15,7 +15,7 @@ describe Specinfra::Backend::Winrm do
   end
 
   describe "#run_command" do
-    subject{Specinfra.backend.run_command('net user')}
+    subject{Specinfra.backend.run_command('net localgroup')}
 
     it "remote command success" do
       expect(subject.stdout).to match /Administrators/
