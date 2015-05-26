@@ -25,6 +25,10 @@ install:
   - ps: Enable-PSRemoting -Force
   - ps: Set-ExecutionPolicy RemoteSigned
   - winrm quickconfig -q
+  - winrm set winrm/config/client @{TrustedHosts="*"}
+  - winrm set winrm/config/client/auth @{Basic="true"}
+  - winrm set winrm/config/service/auth @{Basic="true"}
+  - winrm set winrm/config/service @{AllowUnencrypted="true"}
   - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
   - echo %PATH%
   - ruby --version
@@ -33,7 +37,10 @@ install:
 
 build_script:
   - gem build specinfra.gemspec
-  - gem install -b specinfra-*.gem
-
+  - gem install -b specinfra-*.gem --no-ri --no-rdoc
+  - netstat -a
+  - net user
+  - net localgroup
+  - net user Administrator p@ssword55
 test_script:
-  - ruby -r winrm -e 'WinRM::WinRMWebService.new("http://127.0.0.1:5985/wsman").run_cmd("net user")'
+  - ruby -r winrm -e '::WinRM::WinRMWebService.new("http://127.0.0.1:5985/wsman", :plaintext, :user => "Administrator", :pass => "p@ssword55", :basic_auth_only => true).run_cmd("net user")'
