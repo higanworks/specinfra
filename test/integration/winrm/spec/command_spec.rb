@@ -1,16 +1,24 @@
 describe Specinfra::Backend::Winrm do
   describe "#create_command_class" do
-    expect(Specinfra.backend.command.send(:create_command_class, 'user')).to eq "Specinfra::Command::Windows::Base::User"
-    expect(Specinfra.backend.command.send(:create_command_class, 'user')).to eq "Specinfra::Command::Windows::Base::User"
+    it "creates class based on Windows" do
+      expect(Specinfra.backend.command.send(:create_command_class, 'user')).to eq "Specinfra::Command::Windows::Base::User"
+      expect(Specinfra.backend.command.send(:create_command_class, 'service')).to eq "Specinfra::Command::Windows::Base::Service"
+    end
   end
 
   describe "#get_command for powershell" do
     subject(Specinfra.backend.command.get(:check_user_exists, 'testuser'))
-    expect(subject.class).to eq "Specinfra::Backend::PowerShell::Command"
+
+    it "returns powershell command" do
+      expect(subject.class).to eq "Specinfra::Backend::PowerShell::Command"
+    end
   end
 
   describe "#run_command" do
     subject(Specinfra.backend.run_command('net user'))
-    expect(subject.stdout).to match /Administrators/
+
+    it "remote command success" do
+      expect(subject.stdout).to match /Administrators/
+    end
   end
 end
