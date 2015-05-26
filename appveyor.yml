@@ -41,6 +41,10 @@ build_script:
   - netstat -a
   - net user
   - net localgroup
-  - net user Administrator p@ssword55
+  - net localgroup 'Administrators'
+  - net localgroup 'Remote Management Users'
+  - net user appveyor p@ssword55
+  - net localgroup 'Administrators' appveyor /Add
+  - net localgroup 'Remote Management Users' appveyor /Add
 test_script:
-  - ruby -r winrm -e '::WinRM::WinRMWebService.new("http://127.0.0.1:5985/wsman", :plaintext, :user => "Administrator", :pass => "p@ssword55", :basic_auth_only => true).run_cmd("net user")'
+  - ruby -r winrm -e '::WinRM::WinRMWebService.new("http://127.0.0.1:5985/wsman", :plaintext, :user => "appveyor", :pass => "p@ssword55", :basic_auth_only => true).run_cmd("net user")'
