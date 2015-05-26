@@ -45,4 +45,4 @@ build_script:
   - net user appveyor p@ssword55
 
 test_script:
-  - bundle exec rspec -r .\test\integration\winrm\spec_helper.rb .\test\integration\winrm
+  - bundle exec rspec --backtrace -r .\test\integration\winrm\spec_helper.rb .\test\integration\winrm
