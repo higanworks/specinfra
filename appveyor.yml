@@ -14,7 +14,7 @@ environment:
     - ruby_version: "22"
 
 clone_folder: c:\projects\specinfra
-clone_depth: 1
+clone_depth: 5
 branches:
   only:
     - winrm_test_on_appveyor
@@ -42,7 +42,7 @@ build_script:
   - netstat -a
   - net user
   - net localgroup
-  - net user appveyor $(WINDOWS_PASSWORD) # shoud set to env via web console.
+  - net user appveyor p@ssword55
 
 test_script:
   - bundle exec rspec -r .\test\integration\winrm\spec_helper.rb .\test\integration\winrm
