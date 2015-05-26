@@ -1,8 +1,8 @@
 describe Specinfra::Backend::Winrm do
   describe "#create_command_class" do
     it "creates class based on Windows" do
-      expect(Specinfra.backend.command.send(:create_command_class, 'user')).to be_a_kind_of(Specinfra::Command::Windows::Base::User)
-      expect(Specinfra.backend.command.send(:create_command_class, 'service')).to be_a_kind_of(Specinfra::Command::Windows::Base::Service)
+      expect(Specinfra.backend.command.send(:create_command_class, 'user')).to eq Specinfra::Command::Windows::Base::User
+      expect(Specinfra.backend.command.send(:create_command_class, 'service')).to eq Specinfra::Command::Windows::Base::Service
     end
   end
 
@@ -10,7 +10,7 @@ describe Specinfra::Backend::Winrm do
     subject{Specinfra.backend.command.get(:check_user_exists, 'testuser')}
 
     it "returns powershell command" do
-      expect(subject.class).to be_a_kind_of(Specinfra::Backend::PowerShell::Command)
+      expect(subject).to be_a_kind_of(Specinfra::Backend::PowerShell::Command)
     end
   end
 
