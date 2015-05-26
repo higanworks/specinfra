@@ -42,7 +42,7 @@ build_script:
   - netstat -a
   - net user
   - net localgroup
-  - net user appveyor $(windows_password) # shoud set to env via web console.
+  - net user appveyor $(WINDOWS_PASSWORD) # shoud set to env via web console.
 
 test_script:
   - bundle exec rspec -r .\test\integration\winrm\spec_helper.rb .\test\integration\winrm
