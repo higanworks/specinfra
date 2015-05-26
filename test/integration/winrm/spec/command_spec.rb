@@ -15,10 +15,10 @@ describe Specinfra::Backend::Winrm do
   end
 
   describe "#run_command" do
-    subject{Specinfra.backend.run_command('net localgroup')}
+    subject{Specinfra.backend.run_command('net user')}
 
     it "remote command success" do
-      expect(subject.stdout).to match /Administrators/
+      expect(subject.stdout).to match /Guest/
     end
   end
 end
