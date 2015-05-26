@@ -18,15 +18,21 @@ matrix:
   allow_failures:
     - ruby_version: "22"
 
-clone_folder: c:\projects\specinfra
+clone_folder: c:\projects\%appveyor_project_name%
 clone_depth: 5
 branches:
   only:
     - winrm_test_on_appveyor
 
 cache:
+  - C:\Ruby193\lib\ruby\gems\1.9.1
+  - C:\Ruby193\bin
   - C:\Ruby200\lib\ruby\gems\2.0.0
   - C:\Ruby200\bin
+  - C:\Ruby21\bin
+  - C:\Ruby21\lib\ruby\gems\2.1.0
+  - C:\Ruby22\bin
+  - C:\Ruby22\lib\ruby\gems\2.2.0
 
 install:
   - ps: Enable-PSRemoting -Force
