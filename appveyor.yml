@@ -5,7 +5,7 @@ platform:
   - x64
 
 environment:
-  bundle_gemfile: Gemfile
+  bundle_gemfile: test/integration/winrm/Gemfile
 
   matrix:
     - ruby_version: "193"
@@ -33,11 +33,10 @@ install:
   - echo %PATH%
   - ruby --version
   - gem --version
-  - gem install winrm --no-ri --no-rdoc
+  - gem install bundler --no-ri --no-rdoc
 
 build_script:
-  - gem build specinfra.gemspec
-  - gem install -b specinfra-*.gem --no-ri --no-rdoc
+  - bundle install 
   - netstat -a
   - net user
   - net localgroup
@@ -47,4 +46,4 @@ build_script:
   - net localgroup 'Administrators' appveyor /Add
   - net localgroup 'Remote Management Users' appveyor /Add
 test_script:
-  - ruby -r winrm -e '::WinRM::WinRMWebService.new("http://127.0.0.1:5985/wsman", :plaintext, :user => "appveyor", :pass => "p@ssword55", :basic_auth_only => true).run_cmd("net user")'
+  - bundle exec rspec -r .\test\integration\winrm\spec_helper.rb .\test\integration\winrm
