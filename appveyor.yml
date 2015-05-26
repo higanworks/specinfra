@@ -37,7 +37,7 @@ install:
   - ruby --version
   - gem --version
   - appveyor DownloadFile -Url %bundler_url% -FileName bundler.gem
-  - gem install --local bundler.gem --no-document ## appveyor often stops `gem install bundler`..?
+  - gem install --local bundler.gem --no-ri --no-rdoc ## appveyor often stops `gem install bundler`..?
 
 build_script:
   - bundle install --jobs 3 --retry -3
