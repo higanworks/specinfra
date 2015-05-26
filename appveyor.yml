@@ -10,6 +10,8 @@ environment:
   matrix:
     - ruby_version: "193"
     - ruby_version: "200"
+    - ruby_version: "21"
+    - ruby_version: "22"
 
 clone_folder: c:\projects\specinfra
 clone_depth: 1
